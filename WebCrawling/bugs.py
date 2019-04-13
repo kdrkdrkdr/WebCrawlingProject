@@ -1,8 +1,8 @@
-
-
 from requests import get
 from bs4 import BeautifulSoup
 from sys import stdout
+
+# 우리나라 기준 벅스 차트 1~100위 크롤링
 
 url = "https://music.bugs.co.kr/chart/track/realtime/total?nation=KR"
 
