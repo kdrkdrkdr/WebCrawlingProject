@@ -1,6 +1,5 @@
 from bs4 import BeautifulSoup
 from selenium import webdriver
-from requests import get
 
 # 멜론 차트 크롤링
 
