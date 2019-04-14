@@ -2,7 +2,7 @@ from requests import get
 from bs4 import BeautifulSoup
 from selenium import webdriver
 
-# 애니 플러스 캐릭터 순위 크롤링
+# 애니 플러스 기준 최신 캐릭터 순위 크롤링
 
 options = webdriver.ChromeOptions()
 options.add_argument('headless')
