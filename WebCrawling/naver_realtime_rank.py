@@ -17,7 +17,7 @@ while True:
             if agegroup == 2: age = "20s"
             if agegroup == 3: age = "30s"
             if agegroup == 4: age = "40s"
-            if agegroup == 5: age == "50s"
+            if agegroup == 5: age = "50s"
             if agegroup == 6: print("\n프로그램을 종료합니다."); break
 
             options = webdriver.ChromeOptions()
