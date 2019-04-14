@@ -19,6 +19,7 @@ soup = BeautifulSoup(html, 'html.parser')
 melon_chart = soup.find('div', {'class':'service_list_song type02 d_song_list'}).find_all("div", {"class":"ellipsis rank01"})
 
 rank = 0
+print()
 for mc in melon_chart:
 
     if rank == 0:
