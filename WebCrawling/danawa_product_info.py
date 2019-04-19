@@ -1,6 +1,5 @@
 #-*-coding:utf-8-*-
 
-
 # 다나와 상품 정보 크롤링
 
 from bs4 import BeautifulSoup
@@ -20,6 +19,7 @@ url = str(input("\n다나와 상품 url을 넣어주세요. : "))
 
 if not 'prod.danawa.com' in url:
     print("\n다나와 상품 주소가 아닙니다.")
+    exit(0)
 
 driver.get(url)
 html = driver.page_source
