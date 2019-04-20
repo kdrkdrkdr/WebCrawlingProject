@@ -6,7 +6,7 @@ from shutil import rmtree
 base_url   = "https://namu.wiki"
     
 
-def download(url, filename):
+def Download(url, filename):
     with open(filename, "wb") as f:
         resp = get(url)
         f.write(resp.content)
@@ -64,7 +64,7 @@ def Search():
     except EOFError:
         print("\n다시 선택해주세요.\n")
 
-def W():
+def Document():
     ClearWindow()
     try:
         title = str(input("문서 제목을 입력해주세요. : "))
@@ -119,7 +119,7 @@ def W():
                 for fname in w_title:
                     if '//w.namu.la' in check:
                         w_img_url = "https:" + check
-                        download(w_img_url, '{}'.format(str(fname.text) + str(img_count + 1) + ".jpg").replace('/', ' '))
+                        Download(w_img_url, '{}'.format(str(fname.text) + str(img_count + 1) + ".jpg").replace('/', ' '))
                         img_count += 1
             chdir('../')
             
@@ -138,7 +138,7 @@ def main():
             if select == 1:
                 Search()
             elif select == 2:
-                W()
+                Document()
             elif select == 3:
                 ClearWindow()
                 break
