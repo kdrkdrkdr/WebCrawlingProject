@@ -9,7 +9,7 @@ search_url = base_url + "/search/"
 count = 0
 
 for p in range(0, page, 1):
-    print("\n" + str(p+1) + " 페이지")
+    print("\n\n" + str(p+1) + " 페이지")
     print('{}\n'.format('='*30))
 
     url = search_url + keyword + "?page={}".format(p+1)
@@ -27,4 +27,4 @@ for p in range(0, page, 1):
             count += 1
     page += 1
 
-print("\n[총 {}개의 검색결과가 나왔습니다.]".format(count))
+print("\n\n총 {}개의 결과가 검색되었습니다.".format(count))
