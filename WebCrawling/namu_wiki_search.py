@@ -11,6 +11,12 @@ def Download(url, filename):
         resp = get(url)
         f.write(resp.content)
 
+def FileWrite(filename, *lst):
+    f = open(filename, 'w', encoding='utf-8')
+    for i in lst:
+        f.write(i.text + "\n")
+    f.close()
+
 def ClearWindow():
     if name == 'nt':
         system('cls')
@@ -64,6 +70,7 @@ def Search():
     except EOFError:
         print("\n다시 선택해주세요.\n")
 
+
 def Document():
     ClearWindow()
     try:
@@ -75,15 +82,21 @@ def Document():
 
         if title.replace(" ", "") != "":
 
-            w_title = soup.find_all('span', {'class':'wiki-document-title'})
-            w_edit_day = soup.find_all('p', {'class':'wiki-edit-date'})
-            w_category = soup.find_all('div', {'class':'wiki-category'})
-            w_macrotoc = soup.find_all('span', {'class':'toc-item'})
-            w_information = soup.find_all('div', {'class':'wiki-paragraph'})
-            w_otherInfo = soup.find_all('span', {'class':'footnote-list'})
-            w_image = soup.find_all('img', {'class':'wiki-image'})
-                                        
-            for title in w_title:
+            wiki_document_title     = soup.find_all('span', {'class':'wiki-document-title'})
+            wiki_edit_day           = soup.find_all('p', {'class':'wiki-edit-date'})
+            wiki_category           = soup.find_all('div', {'class':'wiki-category'})
+            wiki_toc_item           = soup.find_all('span', {'class':'toc-item'})
+            wiki_heading            = soup.find_all('h2', {'class':'wiki-heading'})
+            wiki_paragraph          = soup.find_all('div', {'class':'wiki-paragraph'})
+            wiki_footnote_list      = soup.find_all('span', {'class':'footnote-list'})
+            wiki_image              = soup.find_all('img', {'class':'wiki-image'})
+
+            for h in wiki_heading:
+                print(h.text + "\n" + "="*100)
+                for p in wiki_paragraph:
+                    print(p.text)
+
+            for title in wiki_document_title:
                 dir_name = str(title.text) + '(namu.wiki)'
 
             if '/' in dir_name:
@@ -96,27 +109,21 @@ def Document():
 
             chdir("./{}".format(dir_name))
 
-            f = open(dir_name + " (문서).txt", "w", encoding='utf-8')
+            fname = dir_name + " (문서).txt"
 
-            for title in w_title:
-                f.write(title.text + "\n")
-            for editday in w_edit_day:
-                f.write(editday.text + "\n")
-            for category in w_category:
-                f.write(category.text + "\n")
-            for macrotoc in w_macrotoc:
-                f.write(macrotoc.text + "\n")
-            for information in w_information:
-                f.write(information.text + "\n")
-            for otherInfo in w_otherInfo:
-                f.write(otherInfo.text + "\n")
-
-            f.close()                            
+            FileWrite(fname, 
+                *wiki_document_title,
+                *wiki_edit_day,
+                *wiki_category,
+                *wiki_toc_item,
+                *wiki_heading,
+                *wiki_paragraph,
+                *wiki_footnote_list)
 
             img_count = 0
-            for img in w_image:
+            for img in wiki_image:
                 check = img.get('src')
-                for fname in w_title:
+                for fname in wiki_document_title:
                     if '//w.namu.la' in check:
                         w_img_url = "https:" + check
                         Download(w_img_url, '{}'.format(str(fname.text) + str(img_count + 1) + ".jpg").replace('/', ' '))
@@ -128,6 +135,7 @@ def Document():
     except KeyboardInterrupt:
         print("\n다시 입력해주세요.\n")
 
+Document()
 
 def main():
     ClearWindow()
