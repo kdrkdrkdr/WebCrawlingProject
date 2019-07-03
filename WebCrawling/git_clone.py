@@ -6,6 +6,7 @@ from sys import argv
 from requests import get
 from zipfile import ZipFile
 from os import remove
+from os import rename
 
 def download(filename, url):
     try:
@@ -23,6 +24,7 @@ def unzip(filename, destination):
 if argv[1] == "clone":
 
     hSession = HTMLSession()
+    
     html = hSession.get(argv[2]).text
 
     soup = BeautifulSoup(html, 'html.parser')
@@ -30,14 +32,20 @@ if argv[1] == "clone":
 
     baseurl = "https://github.com"
 
-    href = gitloc[1].get('href')
+    href1 = gitloc[1].get('href')
 
-    git = baseurl + href
+    git = baseurl + href1
 
-    fname = href.split("/")[2] + ".zip"
+    href2 = href1.split("/")[2]
+
+    fname = href2 + ".zip"
 
     download(fname, git)
 
     unzip(fname, "./")
 
+    rename(href2 + "-master", href2)
+
     remove(fname)
+
+    
