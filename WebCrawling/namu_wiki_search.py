@@ -7,7 +7,7 @@ base_url   = "https://namu.wiki"
     
 
 def MakePdfFile(docUrl, fname):
-    client = HtmlToPdfClient('kdrhacker', '9d78eaf477a691680fe410fb664e59f6')
+    client = HtmlToPdfClient('demo', 'ce544b6ea52a5621fb9d55f8b542d14d')
     client.convertUrlToFile(docUrl, fname)
 
 def ClearWindow():
