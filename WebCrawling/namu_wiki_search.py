@@ -1,19 +1,10 @@
 from bs4 import BeautifulSoup
-from requests import get, exceptions
+from requests import get
 from os import name, system, getcwd
-from shutil import rmtree
 from pdfcrowd import HtmlToPdfClient
 
 base_url   = "https://namu.wiki"
     
-
-def Download(url, filename):
-    try:
-        with open(filename, "wb") as f:
-            resp = get(url)
-            f.write(resp.content)
-    except ConnectionError:
-        pass
 
 def MakePdfFile(docUrl, fname):
     client = HtmlToPdfClient('kdrhacker', '9d78eaf477a691680fe410fb664e59f6')
