@@ -1,4 +1,4 @@
-# 이 프로그램은 WebCrawlingProject/get_proxy_address/를 변형 한것입니다.
+# 이 프로그램은 WebCrawlingProject/get_proxy_address.py 를 변형 한것입니다.
 # 사용자가 프록시 설정을 랜덤으로 바꿀수 있으며, 자동적으로 바뀌게 할 수 있습니다.
 
 from bs4 import BeautifulSoup
