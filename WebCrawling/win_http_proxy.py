@@ -1,5 +1,6 @@
 # 이 프로그램은 WebCrawlingProject/get_proxy_address.py 를 변형 한것입니다.
 # 사용자가 프록시 설정을 랜덤으로 바꿀수 있으며, 자동적으로 바뀌게 할 수 있습니다.
+# 마이크로소프트 WinHTTP를 이용했습니다.
 
 from bs4 import BeautifulSoup
 from requests import get, exceptions
@@ -90,9 +91,12 @@ def apply():
     return
 
 def serviceProxy():
+    count = 0
     while True:
         try:
-            print("\n[Ctrl-C 를 입력하면 종료됩니다.]\n")
+            count += 1
+            print("{}번 바뀌었습니다.".format(count))
+            print("Ctrl-C 를 입력하면 종료됩니다.\n")
             apply()        
             sleep(60)
             system("cls")
@@ -103,10 +107,8 @@ def serviceProxy():
 
 
 def main():
-
     if checkInternetConnection() == False:
         exit('인터넷 연결을 확인하세요.')
-        
 
     if windll.shell32.IsUserAnAdmin() == True:
 
@@ -127,10 +129,8 @@ def main():
                 elif select == 4:
                     applyProxy(reset=True)
 
-
                 elif select == 5:
                     serviceProxy()
-
 
                 elif select == 6:
                     exit("프로그램을 종료합니다.")
@@ -144,6 +144,7 @@ def main():
     else:
         exit("관리자 권한으로 실행시켜주세요.")
 
+    return
 
 if __name__ == "__main__":
     main()
