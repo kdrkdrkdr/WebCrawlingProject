@@ -66,7 +66,7 @@ def getProxy(Store=False):
         return
 
     else:
-        with open('proxylist.csv', 'w') as f:
+        with open('{}\\proxylist.csv'.format(getcwd()), 'w') as f:
             f.write('IP Address,Port,Code,Country,Anonymity,Google,Https,Last Checked\n\n')
             f.write(contents)
 
