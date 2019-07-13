@@ -2,12 +2,11 @@
 # 사용자가 프록시 설정을 랜덤으로 바꿀수 있으며, 자동적으로 바뀌게 할 수 있습니다.
 
 from bs4 import BeautifulSoup
-from requests import get
+from requests import get, exceptions
 from os import getcwd, system
 from random import choice
 from ctypes import windll
 from time import sleep
-
 
 ProxyList = []
 selectList = '''
@@ -19,6 +18,13 @@ selectList = '''
 6. 프로그램 종료
 
 >> '''
+
+def checkInternetConnection():
+    try:
+        response = get("https://www.google.com")
+    except ( exceptions.ConnectionError ):
+        return False
+    
 
 def echooff():
     system('echo off')
@@ -84,13 +90,17 @@ def apply():
 def serviceProxy():
     while True:
         try:
-            print("\nCtrl-C 를 입력하면 종료합니다.\n\n")
+            print("\nCtrl-C 를 입력하면 종료됩니다.\n\n")
             apply()        
             sleep(60)
         except ( KeyboardInterrupt ):
             break
 
 def main():
+
+    if checkInternetConnection() == False:
+        exit('인터넷 연결을 확인하세요.')
+
 
     if windll.shell32.IsUserAnAdmin() == True:
 
@@ -117,7 +127,7 @@ def main():
 
 
                 elif select == 6:
-                    break
+                    exit("프로그램을 종료합니다.")
 
                 else:
                     print("다시 선택해주세요.\n")
@@ -126,8 +136,7 @@ def main():
                 print("다시 선택해주세요.\n")
 
     else:
-        print("관리자 권한으로 실행시켜주세요.")
-        system("pause")
+        exit("관리자 권한으로 실행시켜주세요.")
 
 
 if __name__ == "__main__":
