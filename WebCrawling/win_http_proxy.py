@@ -34,6 +34,7 @@ def echooff():
 
 def showProxy():
     system('netsh winhttp show proxy')
+    return
 
 
 def applyProxy(ip_port="", reset=False):
@@ -77,6 +78,7 @@ def getProxy(Store=False):
             f.write(contents)
 
         print("[{}\\proxylist.csv] 에 저장되었습니다.".format(getcwd()))
+    
     return
 
 
@@ -85,7 +87,7 @@ def apply():
     getProxy(Store=False)
     proxy = choice(ProxyList)
     applyProxy(ip_port=proxy)
-
+    return
 
 def serviceProxy():
     while True:
@@ -96,12 +98,15 @@ def serviceProxy():
             system("cls")
         except ( KeyboardInterrupt ):
             break
+    
+    return
+
 
 def main():
 
     if checkInternetConnection() == False:
         exit('인터넷 연결을 확인하세요.')
-
+        
 
     if windll.shell32.IsUserAnAdmin() == True:
 
