@@ -22,13 +22,13 @@ selectList = '''
 def checkInternetConnection():
     try:
         response = get("https://www.google.com")
+        return True
     except ( exceptions.ConnectionError ):
         return False
     
 
 def echooff():
     system('echo off')
-    system('cls')
     return
     
 
@@ -90,9 +90,10 @@ def apply():
 def serviceProxy():
     while True:
         try:
-            print("\nCtrl-C 를 입력하면 종료됩니다.\n\n")
+            print("\n[Ctrl-C 를 입력하면 종료됩니다.]\n")
             apply()        
             sleep(60)
+            system("cls")
         except ( KeyboardInterrupt ):
             break
 
@@ -132,7 +133,7 @@ def main():
                 else:
                     print("다시 선택해주세요.\n")
 
-            except ( ValueError ):
+            except ( ValueError, KeyboardInterrupt, EOFError ):
                 print("다시 선택해주세요.\n")
 
     else:
