@@ -62,18 +62,18 @@ def main(showGraph=False):
         percent7d = coinCsv['% 7 days']
 
 
-        xValue = tuple(symbol[0:10])
-        yValue = tuple(percent1h[0:10])
+        xValue = list(symbol[0:10])
+        yValue = list(percent1h[0:10])
         nGroups = len(xValue)
         index = arange(nGroups)
 
-        pyplot.bar(index, yValue, tick_label=xValue, align='center')
+        pyplot.plot(xValue, yValue, 'r.--')
 
         pyplot.xlim(-1, nGroups)
         pyplot.ylim(-2, 2)
 
         pyplot.xlabel('Coin Type')
-        pyplot.ylabel('Rate of change in 24 hours')
+        pyplot.ylabel('Rate of change in 1 hour')
 
 
         pyplot.show()
