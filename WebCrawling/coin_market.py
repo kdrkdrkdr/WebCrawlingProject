@@ -69,14 +69,14 @@ def main(showGraph=False):
         index = arange(nGroups)
 
 
-        pyplot.title('Dot Graph: Rate of change in 1 hour')
-        pyplot.plot(xValue, yValue, 'r.--')
+        pyplot.title('Rate of change in 1 hour')
+        pyplot.plot(xValue, yValue, 'r.-')
 
         pyplot.xlim(-1, nGroups)
         pyplot.ylim(-2, 2)
 
         pyplot.xlabel('Coin Type')
-        pyplot.ylabel('Rate of change in 1 hour')
+        pyplot.ylabel('Rate of change')
 
 
         pyplot.show()
