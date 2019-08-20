@@ -64,9 +64,12 @@ def main(showGraph=False):
 
         xValue = list(symbol[0:10])
         yValue = list(percent1h[0:10])
+
         nGroups = len(xValue)
         index = arange(nGroups)
 
+
+        pyplot.title('Dot Graph: Rate of change in 1 hour')
         pyplot.plot(xValue, yValue, 'r.--')
 
         pyplot.xlim(-1, nGroups)
