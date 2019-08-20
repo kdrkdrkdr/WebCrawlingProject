@@ -2,8 +2,16 @@ from bs4 import BeautifulSoup
 from requests_html import HTMLSession
 from csv import writer
 from time import sleep, strftime
+from pandas import read_csv
+from matplotlib import pyplot
+from numpy import arange
 
-def main():
+
+filename = '{}__coinlist.csv'.format(strftime("%Y-%m-%d__%H-%M-%S"))
+
+
+def main(showGraph=False):
+    global filename
 
     hSession = HTMLSession()
     hParser = "html.parser"
@@ -12,7 +20,7 @@ def main():
     coinHtml = hSession.get(coinUrl).text
     coinSoup = BeautifulSoup(coinHtml, hParser)
 
-    coinCsv = open('{}__coinlist.csv'.format(strftime("%Y-%m-%d__%H-%M-%S")), 'w', encoding='utf-8', newline='')
+    coinCsv = open(filename, 'w', encoding='utf-8', newline='')
     coinWriter = writer(coinCsv)
     coinWriter.writerow(['#', 'Name', 'Symbol', '$ Market Cap', '$ Price', '$ Circulating Supply', '$ Volume (24h)', '% 1 hour', '% 24 hours', '% 7 days'])
 
@@ -38,8 +46,39 @@ def main():
 
     coinCsv.close()
 
+
+    if showGraph == True:
+        coinCsv = read_csv(filename)
+
+        number = coinCsv['#']
+        name = coinCsv['Name']
+        symbol = coinCsv['Symbol']
+        marketCap = coinCsv['$ Market Cap']
+        price = coinCsv['$ Price']
+        circulatingSupply = coinCsv['$ Circulating Supply']
+        volume24h = coinCsv['$ Volume (24h)']
+        percent1h = coinCsv['% 1 hour']
+        percent24h = coinCsv['% 24 hours']
+        percent7d = coinCsv['% 7 days']
+
+
+        xValue = tuple(symbol[0:10])
+        yValue = tuple(percent1h[0:10])
+        nGroups = len(xValue)
+        index = arange(nGroups)
+
+        pyplot.bar(index, yValue, tick_label=xValue, align='center')
+
+        pyplot.xlim(-1, nGroups)
+        pyplot.ylim(-2, 2)
+
+        pyplot.xlabel('Coin Type')
+        pyplot.ylabel('Rate of change in 24 hours')
+
+
+        pyplot.show()
+
+
 if __name__ == "__main__":
-    while True:
-        main()
-        print("1시간 후에 다시 가져옵니다.")
-        sleep(60*60)
+    # If you want only store csv file, main(showGraph=False)
+    main(showGraph=True)
